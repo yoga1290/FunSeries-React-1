@@ -5,6 +5,8 @@ var SurveyList = require('./components/SurveyList');
 var React= require('react');
 var ReactDOM = require('react-dom');
 
+var SurveyWizard = require('./components/SurveyWizard');
+ReactDOM.render(<SurveyWizard/>, document.getElementById('fun')); /*
 
 ReactDOM.render(<SurveyList url="http://www.mocky.io/v2/56fcf6871000000e13aed252"/>, document.getElementById('fun'));
 
