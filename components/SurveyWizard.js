@@ -6,8 +6,8 @@ var SurveyQuestionWizard = React.createClass({
 		};
 	},
 	render: function () {
-		return <div>{this.state.question}<br/>
-					{this.state.choice.map(function(obj,i){
+		return <div>{this.props.question}<br/>
+					{this.props.choice.map(function(obj,i){
 						return <div key={i}><input type="checkbox"  value={i}/> {obj}</div>;
 					})}
 		</div>;
@@ -17,21 +17,25 @@ var SurveyQuestionWizard = React.createClass({
 var SurveyWizard = React.createClass({
 	getInitialState: function(){
 		return {
+			offset: 0,
 			questions: [{
-				question: '',
+				question: 'question#1',
 				choice: ['A', 'B', 'C']
 			}, {
-				question: '',
+				question: 'question#2',
 				choice: ['A', 'B', 'C']
 			}]
 		};
 	},
+	onclick: function() {
+		this.state.offset++;
+		console.log('offset:', this.state.offset);
+	},
 	render: function () {
 		return <p>
-					{this.state.questions.map(function(question,i){
-						return <SurveyQuestionWizard question={question.question} choice={question.choice} />;
-					})}
-		</p>
+					<SurveyQuestionWizard question={this.state.questions[this.state.offset].question} choice={this.state.questions[this.state.offset].choice} />
+					<button onclick={this.onclick()}>Next</button>
+				</p>
 	}
 });
 

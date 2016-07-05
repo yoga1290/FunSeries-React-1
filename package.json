@@ -7,6 +7,7 @@
     "example": "examples"
   },
   "scripts": {
+    "browserify": "browserify -t babelify main.js -o bundle.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "hmehta",
