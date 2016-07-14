@@ -232,12 +232,12 @@ module.exports = SurveyList;
 var SurveyQuestionWizard = React.createClass({
 	displayName: 'SurveyQuestionWizard',
 
-	getInitialState: function () {
-		return {
-			question: 'question',
-			choice: ['A', 'B', 'C']
-		};
-	},
+	// getInitialState: function(){
+	// 	return {
+	// 		question: 'question',
+	// 		choice: ['A', 'B', 'C']
+	// 	};
+	// },
 	render: function () {
 		return React.createElement(
 			'div',
@@ -262,28 +262,32 @@ var SurveyWizard = React.createClass({
 
 	getInitialState: function () {
 		return {
-			offset: 0,
-			questions: [{
-				question: 'question#1',
-				choice: ['A', 'B', 'C']
-			}, {
-				question: 'question#2',
-				choice: ['A', 'B', 'C']
-			}]
+			offset: 0
 		};
 	},
-	onclick: function () {
-		this.state.offset++;
-		console.log('offset:', this.state.offset);
+	questions: [{
+		text: 'question#1',
+		choice: ['A', 'B', 'C']
+	}, {
+		text: 'question#2',
+		choice: ['A', 'B', 'C']
+	}],
+	onClickHandler: function () {
+		this.setState({
+			offset: this.state.offset + 1
+		});
+		console.log('offset:', this.state);
 	},
 	render: function () {
 		return React.createElement(
-			'p',
+			'div',
 			null,
-			React.createElement(SurveyQuestionWizard, { question: this.state.questions[this.state.offset].question, choice: this.state.questions[this.state.offset].choice }),
+			React.createElement(SurveyQuestionWizard, {
+				question: this.questions[this.state.offset].text,
+				choice: this.questions[this.state.offset].choice }),
 			React.createElement(
 				'button',
-				{ onclick: this.onclick() },
+				{ onClick: this.onClickHandler },
 				'Next'
 			)
 		);

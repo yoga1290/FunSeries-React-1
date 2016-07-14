@@ -8,6 +8,7 @@
   },
   "scripts": {
     "browserify": "browserify -t babelify main.js -o bundle.js",
+    "watchify": "watchify -t babelify main.js -o bundle.js -v",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "hmehta",
