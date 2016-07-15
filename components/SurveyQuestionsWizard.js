@@ -1,10 +1,4 @@
 var SurveyQuestionWizard = React.createClass({
-	// getInitialState: function(){
-	// 	return {
-	// 		question: 'question',
-	// 		choice: ['A', 'B', 'C']
-	// 	};
-	// },
 	render: function () {
 		return <div>{this.props.question}<br/>
 					{this.props.choice.map(function(obj,i){
@@ -14,10 +8,10 @@ var SurveyQuestionWizard = React.createClass({
 	}
 });
 
-var SurveyWizard = React.createClass({
+var SurveyQuestionsWizard = React.createClass({
 	getInitialState: function(){
 		return {
-			offset: 0
+			offset: -1
 		};
 	},
 	questions: [{
@@ -31,16 +25,21 @@ var SurveyWizard = React.createClass({
 		this.setState({
 			offset: this.state.offset + 1,
 		});
-		console.log('offset:', this.state);
 	},
 	render: function () {
-		return <div>
-					<SurveyQuestionWizard 
-						question={this.questions[this.state.offset].text} 
-						choice={this.questions[this.state.offset].choice} />
-					<button onClick={this.onClickHandler}>Next</button>
-				</div>
+		if (this.state.offset < 0) {
+			return <button onClick={this.onClickHandler}>Start</button>;
+		} else if (this.state.offset < this.questions.length) {
+			return <div>
+						<SurveyQuestionWizard 
+							question={this.questions[this.state.offset].text} 
+							choice={this.questions[this.state.offset].choice} />
+						<button onClick={this.onClickHandler}>Next</button>
+					</div>;
+		} else {
+			return <button>Submit</button>;
+		}
 	}
 });
 
-module.exports = SurveyWizard;
+module.exports = SurveyQuestionsWizard;
